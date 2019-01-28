@@ -25,6 +25,8 @@ for(let i = 0; i < 2; i++){
 		console.log('done');
 		appData.expenses[a] = b;
 	} else{
+		i = i - 1;
+		console.log('Ошибка при вводе данных!');
 	}
 };
 
