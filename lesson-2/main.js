@@ -18,6 +18,7 @@ let a1 = prompt('Введите обязательную статью расхо
 
 appData.expenses.a1 = a2;
 appData.expenses.a3 = a4;
+
 alert('Ежедневный бюджет ' + appData.bydget / 30);
 console.log(appData);
 
