@@ -12,16 +12,18 @@ let appData = {
 	savings: false
 }
 
+/*Делаем проверку что переменная -a- является строкой
+ и переменные -а- и -b- не была отмена при вызове в prompt, 
+эти переменные не были пустыми строками 
+и переменная -а- не превышала больше 50 символов
+*/
+
 for(let i = 0; i < 2; i++){
 	let a = prompt('Введите обязательную статью расходов в этом месяце', ''),
 		b = prompt('Во сколько обойдется?', '');
 
 	if( (typeof(a)) === 'string' && (typeof(a)) != null && (typeof(b)) != null && a != '' && b != '' && a.length < 50){
-		/*Делаем проверку что переменная -a- является строкой
-		 и переменные -а- и -b- не была отмена при вызове в prompt, 
-		эти переменные не были пустыми строками 
-		и переменная -а- не превышала больше 50 символов
-		*/
+		
 		console.log('done');
 		appData.expenses[a] = b;
 	} else{
@@ -29,6 +31,44 @@ for(let i = 0; i < 2; i++){
 		console.log('Ошибка при вводе данных!');
 	}
 };
+
+// Цикл while
+/*
+let i = 0;
+while (i < 2) {
+	let a = prompt('Введите обязательную статью расходов в этом месяце', ''),
+		b = prompt('Во сколько обойдется?', '');
+
+	if( (typeof(a)) === 'string' && (typeof(a)) != null && (typeof(b)) != null && a != '' && b != '' && a.length < 50){
+		
+		console.log('done');
+		appData.expenses[a] = b;
+	} else{
+		i = i - 1;
+		console.log('Ошибка при вводе данных!');
+	}
+	i++;
+}
+*/
+
+
+// Цикл do while
+/*
+let i = 0;
+do{
+	let a = prompt('Введите обязательную статью расходов в этом месяце', ''),
+		b = prompt('Во сколько обойдется?', '');
+
+	if( (typeof(a)) === 'string' && (typeof(a)) != null && (typeof(b)) != null && a != '' && b != '' && a.length < 50){
+		console.log('done');
+		appData.expenses[a] = b;
+	} else{
+		i = i - 1;
+		console.log('Ошибка при вводе данных!');
+	}
+	i++;
+}while( i < 2);
+*/
 
 appData.moneyPerDay = appData.bydget / 30;
 
