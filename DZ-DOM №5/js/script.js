@@ -6,7 +6,7 @@ let menuItem = document.getElementsByClassName('menu-item');
 let title = document.getElementById('title');
 let adv = document.querySelector('.adv');
 let body = document.createElement('body');
-let prompt = document.querySelector('.prompt');
+let promptContent = document.querySelector('.prompt');
 
 
 // Восстановить порядок в меню
@@ -27,5 +27,5 @@ title.innerHTML = 'Мы продаем только подлинную техн�
 adv.remove();
 
  // Спросить у пользователя отношение к технике apple и записать ответ в блок на странице с id "prompt"
-let q = prompt('Ваше отношение  к технике Apple', '');
-console.log(q)
+let promtQuery = prompt('Ваше отношение  к технике Apple', '');
+promptContent.textContent = promtQuery;
