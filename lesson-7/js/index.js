@@ -7,7 +7,7 @@ let startBtn =document.getElementById('start'),
 	optionalExpensesValue = document.getElementsByClassName('optionalexpenses-value')[0],
 	incomeValue = document.getElementsByClassName('income-value')[0],
 	monthSavingsValue = document.getElementsByClassName('monthsavings-value')[0],
-	yearSavingsValue = document.getElementsByClassName('yearsaving-value')[0],
+	yearSavingsValue = document.getElementsByClassName('yearsavings-value')[0],
 
 	expensesItem = document.getElementsByClassName('expenses-item'),
 	expensesBtn = document.getElementsByTagName('button')[0],
@@ -69,8 +69,8 @@ optionalExpensesBtn.addEventListener('click', function() {
 });
 
 countBtn.addEventListener('click', function() {
-	if (appData.bydget != undefined) {
-		appData.moneyPerDay = (appData.bydget / 30).toFixed();
+	if (appData.budget != undefined) {
+		appData.moneyPerDay = (appData.budget / 30).toFixed();
 		dayBudgetValue.textContent = appData.moneyPerDay;
 
 		if(appData.moneyPerDay < 100){
@@ -85,40 +85,51 @@ countBtn.addEventListener('click', function() {
 	} else {
 		dayBudgetValue.textContent = 'Произошла ошибка'
 	}
-	
 });
 
+incomeItem.addEventListener('input', function() {
+	let items = income.value;
+		appData.income = items.split(', ');
+		incomeValue.textContent = appData.income;
+});
+
+checkSavings.addEventListener('click', function() {
+	if (appData.savings == true) {
+		appData.savings = false;
+	} else {
+		appData.savings = true;
+	}
+})
+
+sumValue.addEventListener('input', function() {
+	if (appData.savings == true) {
+		let sum = +sumValue.value,
+			percent = +percentValue.value;
+		appData.montIncome = sum/100/12*percent;
+		appData.yearIncome = sum/100*percent;
+
+		monthSavingsValue.textContent = appData.montIncome.toFixed(1);
+		yearSavingsValue.textContent = appData.yearIncome.toFixed(1);
+	} 
+});
+
+percentValue.addEventListener('input', function() {
+	if (appData.savings == true) {
+		let sum = +sumValue.value,
+			percent = +percentValue.value;
+		appData.montIncome = sum/100/12*percent;
+		appData.yearIncome = sum/100*percent;
+
+		monthSavingsValue.textContent = appData.montIncome.toFixed(1);
+		yearSavingsValue.textContent = appData.yearIncome.toFixed(1);
+	} 
+})
+
 let appData = {
-	bydget: money,
+	budget: money,
 	timeDate: time,
 	expenses: {},
 	optionalExpenses: {},
 	income: [],
 	savings: true,
-	// detectDayBudget: function() {
-		
-	// 	alert('Ежедневный бюджет ' + appData.moneyPerDay);
-	// },
-	// detectLevel: function() {
-		
-	// 	console.log(appData);
-	// },
-	checkSavings: function() {
-		if(appData.savings == true){
-			let save 	= +prompt('Какова сумма накоплений?', ''),
-				percent = +prompt('Под какой процент?', '');
-			
-			appData.montIncome = save/100/12*percent;
-			alert('Доход в месяц с вашего депозита: ' + appData.montIncome);	
-		}
-	},
-	// chooseOptExpenses: function() {
-		
-	// },
-	choseIncome: function() {
-		let items = prompt('Что принесет дополнительный доход? (Перечислите через запятую)', '');
-		appData.income = items.split(', ');
-		appData.income.push(prompt('Может что-то еще?'));
-		appData.income.sort();
-	}
 };
