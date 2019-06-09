@@ -37,21 +37,22 @@ window.addEventListener('DOMContentLoaded', function() {
 
 // =======================Таймер=======================
 
-	let deadline = '2019-06-21'; //Дата оканчания 
+	let deadline = '2019-06-12'; //Дата оканчания 
 
 	function getTimeRemaining(endtime) {
 		let t = Date.parse(endtime) - Date.parse(new Date()), //Определяем сколько времени осталось (дата оканчания таймера минус ныняшняя дата)
 		seconds = Math.floor((t/1000) % 60), //определяем количество оставшихся секунд
 		minutes = Math.floor((t/1000/60) % 60), //определяем количество оставшихся минут
-		hours = Math.floor((t/(1000*60*60))); //определяем количество оставшихся часов
+		// hours = Math.floor((t/(1000*60*60))); //определяем количество оставшихся часов
 
-		/*
+		
 		// Если нужнен таймер с количеством дней
 		hours = Math.floor((t/1000/60/60) % 24),
 		days = Math.floor((t/(1000*60*60*24)));
-		*/
+		
 		return {
 			'total' : t,
+			'days' : days,
 			'hours' : hours,
 			'minutes' : minutes,
 			'seconds' : seconds
@@ -60,6 +61,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 	function setClock(id, endtime) {
 		let timer = document.getElementById(id),
+			days = timer.querySelector('.days'),
 			hours = timer.querySelector('.hours'),
 			minutes = timer.querySelector('.minutes'),
 			seconds = timer.querySelector('.seconds'),
@@ -67,6 +69,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 		function updateClock() {
 			let t = getTimeRemaining(endtime);
+			days.textContent = t.days;
 			hours.textContent = t.hours;
 			minutes.textContent = t.minutes;
 			seconds.textContent = t.seconds;
@@ -77,6 +80,29 @@ window.addEventListener('DOMContentLoaded', function() {
 		}
 	}
 	setClock('timer', deadline);
+
+	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+//=================модальное окно=================
+
+let more = document.querySelector('.more'),
+	overlay = document.querySelector('.overlay'),
+	close = document.querySelector('.popup-close');
+
+more.addEventListener('click', function() {
+	overlay.style.display = 'block';
+	this.classList.add('more-splash');
+	document.body.style.overflow = 'hidden'; //Запрещаем скрол при открытом модальном окне
+});
+
+close.addEventListener('click', function() {
+	overlay.style.display = 'none';
+	more.classList.remove('more-splash');
+	document.body.style.overflow = '';
+})
+
+
+
 
 
 });
