@@ -102,6 +102,25 @@ close.addEventListener('click', function() {
 })
 
 
+//Форма обратной связи
+let message = {
+	loadin: 'Загрузка...',
+	succes: 'Спасибо! Скоро мы с вами свяжимся',
+	failure: 'Что-то поло не так...';
+}
+
+let form =document.querySelector('.main-form'),
+	input = form.getElementsByTagName('input'),
+	statusMessage = document.createElement('div');
+	statusMessage.classList.add('status');
+	form.addEventListener('submit', function(event) {
+		event.preventDefault();
+		form.appendChild(statusMessage);
+
+		let request = new XMLHttpRequest();
+		request.open('POST', 'server.php');
+		request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	})
 
 
 
